@@ -1,0 +1,19 @@
+INIC
+         ;EXAMPLE GLOBALS
+		 S ^CADRMENU("CADR",1,1)=""
+         S ^CADRMENU("CADR",1,2)=""
+		 S ^CADRMENU("CADR",2,3)=""
+		 S ^CADRFORM(1)="Report 1"
+		 S ^CADRFORM(1,"ACTIVE")=1
+         S ^CADRFORM(1,"COMP")="TXT^Filter^S"
+         S ^CADRFORM(1,"QUERY")="QUERY1^CADR"
+		 S ^CADRFORM(2)="Report 2"
+		 S ^CADRFORM(2,"ACTIVE")=1
+         S ^CADRFORM(2,"COMP")="TXT^Filter^S|DTP^Filter^S"
+         S ^CADRFORM(2,"QUERY")="QUERY2^CADR"
+		 S ^CADRFORM(3)="Report 3"
+		 S ^CADRFORM(3,"ACTIVE")=1
+         S ^CADRFORM(3,"COMP")="CBO^Filter^M^1-Option 1:2-Option 2"
+         S ^CADRFORM(3,"QUERY")="QUERY3^CADR"
+		 
+		 Q

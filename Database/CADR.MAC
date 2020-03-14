@@ -1,0 +1,58 @@
+GETMENUS(USER,SYS)
+         S $ZT="^%ETN"
+         K ^CADR(USER)
+ 
+         S IDMENU=""
+GM1      S IDMENU=$O(^CADRMENU(SYS,IDMENU))
+         I IDMENU="" Q
+ 
+         S IDFORM=""
+GM2      S IDFORM=$O(^CADRMENU(SYS,IDMENU,IDFORM))
+         I IDFORM="" G GM1
+         I '$D(^CADRFORM(IDFORM)) G GM2
+         I $G(^CADRFORM(IDFORM,"ACTIVE"))'=1 G GM2
+ 
+         S CAPTION=^CADRFORM(IDFORM)
+ 
+         S ^CADR(USER,IDMENU,IDFORM)=CAPTION
+         G GM2
+		 
+GETFORM(IDFORM,FORMNAME,QUERY,COMP)
+         S $ZT="^%ETN"
+ 
+         S (FORMNAME,QUERY,COMP)=""
+         I $G(IDFORM)="" Q
+         I '$D(^CADRFORM(IDFORM)) Q
+         I $G(^CADRFORM(IDFORM,"ACTIVE"))'=1 Q
+ 
+         S COMP=^CADRFORM(IDFORM,"COMP")
+         S QUERY=^CADRFORM(IDFORM,"QUERY")
+         S FORMNAME=^CADRFORM(IDFORM)
+ 
+         Q
+		 
+QUERY1(FTXT,USU,COLS)
+         S $ZT="^%ETN"
+ 
+         I USU="" Q
+         K ^CADR(USU)
+ 
+         S $P(COLS,"|",1)="Col 1^DATE^0^COL1"
+         S $P(COLS,"|",2)="Col 2^TEXT^0^COL2"
+ 
+         S TMPFEC=+$H-30
+         F I=1:1:30
+         {
+          S $P(^CADR(USU,I),"^",1)=$ZD(TMPFEC+I)
+          S $P(^CADR(USU,I),"^",2)="Example: "_I
+         }
+ 
+         Q
+		 
+QUERY2(FTXT,FDTP,USU,COLS)
+         S COLS=""
+         Q
+ 
+QUERY3(FCBO,USU,COLS)
+         S COLS=""
+         Q
